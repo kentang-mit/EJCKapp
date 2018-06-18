@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:meta/meta.dart';
+import 'bookdetail.dart';
 
 final _rowHeight = 100.0;
 final _borderRadius = BorderRadius.circular(_rowHeight / 2);
@@ -12,6 +13,27 @@ class BookItem extends StatelessWidget{
     @required this.totalNum,
   });
 
+  void _navigateToDetail(context){
+    Navigator.of(context).push(MaterialPageRoute<Null>(
+      builder: (BuildContext context){
+        return Scaffold(
+          appBar: AppBar(
+            elevation: 1.0,
+            title: Text(
+              '详细信息',
+              style: Theme.of(context).textTheme.display1,
+            ),
+            centerTitle: true,
+          ),
+          body: BookDetail(
+            name: name,
+            totalNum: totalNum,
+          ),
+        );
+      } 
+      )
+    );
+  }
   @override
   Widget build(BuildContext context){
     return Material(
@@ -23,7 +45,7 @@ class BookItem extends StatelessWidget{
           highlightColor: Colors.blue,
           splashColor: Colors.blue,
           onTap: (){
-            print('I am tapped!');
+            _navigateToDetail(context);
           },
           child: Padding(
             padding: EdgeInsets.all(8.0),
